@@ -1,10 +1,286 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Store</title>
+<meta charset="UTF-8">
+<title>Luxury Store</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+body {
+margin: 0;
+font-family: Inter, sans-serif;
+background: radial-gradient(circle at top, #0f0f0f, #000);
+color: white;
+overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 18px 30px;
+background: rgba(255,255,255,0.05);
+backdrop-filter: blur(20px);
+border-bottom: 1px solid rgba(255,255,255,0.1);
+position: sticky;
+top: 0;
+}
+
+.logo {
+font-weight: 700;
+color: #00ffcc;
+letter-spacing: 1px;
+}
+
+input {
+padding: 10px;
+border-radius: 10px;
+border: none;
+width: 220px;
+outline: none;
+}
+
+/* HERO */
+.hero {
+text-align: center;
+padding: 60px 20px;
+}
+
+.hero h1 {
+font-size: 48px;
+background: linear-gradient(90deg, #00ffcc, #00aaff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+0%,100% { transform: translateY(0); }
+50% { transform: translateY(-8px); }
+}
+
+/* PRODUCTS GRID */
+.products {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 25px;
+padding: 30px;
+max-width: 1000px;
+margin: auto;
+}
+
+.card {
+background: rgba(255,255,255,0.06);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 16px;
+padding: 15px;
+transition: 0.3s;
+cursor: pointer;
+}
+
+.card:hover {
+transform: translateY(-8px);
+border-color: #00ffcc;
+}
+
+.card img {
+width: 100%;
+border-radius: 12px;
+}
+
+.price {
+color: #00ffcc;
+font-weight: bold;
+}
+
+/* BUTTON */
+button {
+width: 100%;
+padding: 10px;
+border: none;
+border-radius: 10px;
+background: linear-gradient(90deg, #00ffcc, #00aaff);
+font-weight: bold;
+cursor: pointer;
+margin-top: 8px;
+}
+
+/* CART DRAWER */
+.cart {
+position: fixed;
+right: -320px;
+top: 0;
+width: 300px;
+height: 100%;
+background: rgba(0,0,0,0.95);
+border-left: 1px solid rgba(255,255,255,0.1);
+padding: 20px;
+transition: 0.4s;
+}
+
+.cart.open {
+right: 0;
+}
+
+/* MODAL */
+.modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.8);
+display: none;
+align-items: center;
+justify-content: center;
+}
+
+.modal-content {
+background: #111;
+padding: 20px;
+border-radius: 15px;
+width: 300px;
+}
+
+/* TOAST */
+.toast {
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+background: #00ffcc;
+color: black;
+padding: 10px 20px;
+border-radius: 10px;
+display: none;
+}
+</style>
 </head>
+
 <body>
-  <h1>Welcome to my store</h1>
-  <p>My products coming soon 🔥</p>
+
+<header>
+<div class="logo">LUXURY STORE</div>
+<input placeholder="Search..." onkeyup="search(this.value)">
+<button onclick="toggleCart()">Cart 🛒 (<span id="count">0</span>)</button>
+</header>
+
+<div class="hero">
+<h1>Premium Collection</h1>
+<p>Minimal • Luxury • Fast Checkout</p>
+</div>
+
+<div class="products" id="list">
+
+<div class="card" data-name="shoes">
+<img src="https://via.placeholder.com/250">
+<h3>Luxury Shoes</h3>
+<p class="price">$120</p>
+<button onclick="add('Luxury Shoes',120)">Add</button>
+</div>
+
+<div class="card" data-name="watch">
+<img src="https://via.placeholder.com/250">
+<h3>Designer Watch</h3>
+<p class="price">$250</p>
+<button onclick="add('Designer Watch',250)">Add</button>
+</div>
+
+<div class="card" data-name="hoodie">
+<img src="https://via.placeholder.com/250">
+<h3>Premium Hoodie</h3>
+<p class="price">$90</p>
+<button onclick="add('Premium Hoodie',90)">Add</button>
+</div>
+
+</div>
+
+<!-- CART -->
+<div class="cart" id="cart">
+<h3>Your Cart</h3>
+<div id="items"></div>
+<p id="total"></p>
+<button onclick="checkout()">Checkout</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+<h3 id="mname"></h3>
+<p id="mprice"></p>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Added to cart</div>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("YOUR_PUBLIC_KEY");
+</script>
+
+<script>
+let cart = [];
+
+function add(name, price){
+cart.push({name, price});
+document.getElementById("count").innerText = cart.length;
+showToast();
+}
+
+function toggleCart(){
+document.getElementById("cart").classList.toggle("open");
+render();
+}
+
+function render(){
+let html = "";
+let total = 0;
+
+cart.forEach(i=>{
+html += i.name + " - $" + i.price + "<br>";
+total += i.price;
+});
+
+document.getElementById("items").innerHTML = html;
+document.getElementById("total").innerText = "Total: $" + total;
+}
+
+/* SEARCH */
+function search(v){
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display = c.dataset.name.includes(v.toLowerCase()) ? "block":"none";
+});
+}
+
+/* CHECKOUT */
+function checkout(){
+let order = cart.map(i=>i.name+" $"+i.price).join(", ");
+let total = cart.reduce((a,b)=>a+b.price,0);
+
+emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+message: "Order: " + order,
+total: total
+});
+
+alert("Order sent!");
+
+cart = [];
+document.getElementById("count").innerText = 0;
+toggleCart();
+}
+
+/* TOAST */
+function showToast(){
+let t = document.getElementById("toast");
+t.style.display = "block";
+setTimeout(()=>t.style.display="none",1200);
+}
+</script>
+
 </body>
 </html>
