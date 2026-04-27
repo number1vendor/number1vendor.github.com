@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ELITE PRODUCTS | Luxury Goods at 50% Off</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+>
+
 <style>
 :root {
 --bg-black: #050505;
@@ -312,275 +314,67 @@ display: flex;
 flex-direction: column;
 transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 border-left: 1px solid var(--border-color);
-}
-
-.cart-overlay.active {
-display: block;
-opacity: 1;
-}
-
-.cart-sidebar.active {
-right: 0;
-}
-
-.cart-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 40px;
-padding-bottom: 25px;
-border-bottom: 1px solid var(--border-color);
-}
-
-.cart-header h3 {
-font-size: 24px;
-font-weight: 900;
-text-transform: uppercase;
-letter-spacing: 3px;
-}
-
-.close-cart {
-background: none;
-border: none;
-color: var(--text-main);
-font-size: 32px;
-cursor: pointer;
-line-height: 1;
-}
-
-.cart-items {
-flex-grow: 1;
 overflow-y: auto;
+margin-bottom: 30px;
+/* Checkout Form */
+.checkout-form {
+display: none;
 }
 
-.empty-cart-msg {
-text-align: center;
-color: var(--text-dim);
-margin-top: 60px;
-font-size: 16px;
+.checkout-form.active {
+display: block;
 }
 
-.cart-item {
-display: flex;
-gap: 20px;
-margin-bottom: 25px;
-padding-bottom: 25px;
-border-bottom: 1px solid #1a1a1a;
+.form-group {
+margin-bottom: 20px;
 }
 
-.cart-item-img {
-width: 100px;
-height: 100px;
-object-fit: cover;
-border-radius: 6px;
-}
-
-.cart-item-info {
-flex-grow: 1;
-}
-
-.cart-item-title {
-font-size: 16px;
-font-weight: 700;
-margin-bottom: 8px;
-}
-
-.cart-item-price {
-color: var(--accent-gold);
-font-weight: 800;
-font-size: 18px;
-}
-
-.remove-item {
-background: none;
-border: none;
-color: #ff4444;
+.form-group label {
+display: block;
 font-size: 12px;
 font-weight: 700;
-cursor: pointer;
-margin-top: 15px;
 text-transform: uppercase;
 letter-spacing: 1px;
-}
-
-.cart-footer {
-padding-top: 30px;
-border-top: 1px solid var(--border-color);
-}
-
-.cart-total {
-display: flex;
-justify-content: space-between;
-font-size: 22px;
-font-weight: 900;
-margin-bottom: 25px;
-}
-
-.checkout-btn {
-width: 100%;
-padding: 20px;
-background: var(--accent-gold);
-color: #000;
-border: none;
-font-weight: 900;
-text-transform: uppercase;
-letter-spacing: 3px;
-cursor: pointer;
-transition: var(--transition);
-border-radius: 4px;
-}
-
-.checkout-btn:hover {
-background: #fff;
-transform: translateY(-3px);
-box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-}
-
-/* Footer */
-footer {
-padding: 80px 5%;
-border-top: 1px solid var(--border-color);
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 60px;
-background: #080808;
-}
-
-.footer-col h4 {
-font-size: 16px;
-font-weight: 900;
-margin-bottom: 25px;
-text-transform: uppercase;
-letter-spacing: 2px;
+margin-bottom: 8px;
 color: var(--accent-gold);
 }
 
-.footer-col ul {
-list-style: none;
-}
-
-.footer-col ul li {
-margin-bottom: 15px;
-}
-
-.footer-col ul li a {
-color: var(--text-dim);
-text-decoration: none;
-font-size: 14px;
-transition: var(--transition);
-}
-
-.footer-col ul li a:hover {
-color: var(--accent-gold);
-padding-left: 5px;
-}
-
-.newsletter input {
+.form-group input,
+.form-group select {
 width: 100%;
-padding: 15px;
+padding: 12px;
 background: #111;
 border: 1px solid var(--border-color);
 color: white;
+border-radius: 4px;
+font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+outline: none;
+border-color: var(--accent-gold);
+}
+
+.back-to-cart-btn {
+width: 100%;
+padding: 12px;
+background: transparent;
+border: 1px solid var(--border-color);
+color: var(--text-dim);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 1px;
+cursor: pointer;
 margin-bottom: 15px;
 border-radius: 4px;
-}
-
-.newsletter button {
-width: 100%;
-padding: 15px;
-background: var(--accent-gold);
-color: #000;
-border: none;
-font-weight: 900;
-cursor: pointer;
-border-radius: 4px;
-transition: var(--transition);
-}
-
-.newsletter button:hover {
-background: #fff;
-}
-
-@media (max-width: 768px) {
-nav { display: none; }
-.hero h2 { font-size: 38px; }
-.cart-sidebar { width: 100%; right: -100%; }
-}
-</style>
-</head>
-<body>
-
-<div class="announcement-bar">
-<div class="ticker-wrapper">
-<span class="ticker-item">ELITE DEALS: 50% OFF ALL ITEMS</span>
-<span class="ticker-item">FREE WORLDWIDE SHIPPING</span>
-<span class="ticker-item">LIMITED QUANTITIES AVAILABLE</span>
-<span class="ticker-item">ELITE DEALS: 50% OFF ALL ITEMS</span>
-<span class="ticker-item">FREE WORLDWIDE SHIPPING</span>
-<span class="ticker-item">LIMITED QUANTITIES AVAILABLE</span>
-<span class="ticker-item">ELITE DEALS: 50% OFF ALL ITEMS</span>
-<span class="ticker-item">FREE WORLDWIDE SHIPPING</span>
-<span class="ticker-item">LIMITED QUANTITIES AVAILABLE</span>
-</div>
+PRODUCTS</span></a>
+button>
 </div>
 
-<header>
-<a href="#" class="logo">ELITE<span>PRODUCTS</span></a>
-<nav>
-<a href="#">Home</a>
-<a href="#">Shop All</a>
-<a href="#">Watches</a>
-<a href="#">Bags</a>
-<a href="#">Fragrance</a>
-</nav>
-<div class="header-actions">
-<button class="header-icon"><i class="fas fa-search"></i></button>
-<button class="header-icon"><i class="fas fa-user"></i></button>
-<button class="header-icon" id="cart-trigger">
-<i class="fas fa-shopping-bag"></i>
-<span class="cart-count" id="count">0</span>
-</button>
-</div>
-</header>
-
-<section class="hero">
-<h2>THE <span>ELITE</span> SELECTION</h2>
-<p>Authentic premium goods sourced directly. Experience luxury for exactly half the market price.</p>
-</section>
-
-<main class="product-grid" id="product-grid">
-<!-- Products will be injected here -->
-</main>
-
-<footer>
-<div class="footer-col">
-<h4>ELITE PRODUCTS</h4>
-<p style="color: var(--text-dim); font-size: 14px; line-height: 1.8;">Redefining accessibility in luxury. We source the most wanted items in the world and bring them to you at prices that defy the market. No middleman, just elite value.</p>
-</div>
-<div class="footer-col">
-<h4>Support</h4>
-<ul>
-<li><a href="#">Contact Us</a></li>
-<li><a href="#">Shipping Policy</a></li>
-<li><a href="#">Refund Policy</a></li>
-<li><a href="#">Terms of Service</a></li>
-</ul>
-</div>
-<div class="footer-col newsletter">
-<h4>Join the Elite</h4>
-<p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Get notified about our next limited drop before anyone else.</p>
-<input type="email" placeholder="Email address">
-<button>JOIN NOW</button>
-</div>
-</footer>
-
-<!-- Cart Sidebar -->
-<div class="cart-overlay" id="cart-overlay"></div>
-<div class="cart-sidebar" id="cart-sidebar">
-<div class="cart-header">
-<h3>Your Cart</h3>
-<button class="close-cart" id="close-cart">&times;</button>
-</div>
+<!-- Cart Items View -->
+<div id="cart-view">
 <div class="cart-items" id="cart-items-container">
 <p class="empty-cart-msg">Your cart is currently empty.</p>
 </div>
@@ -589,7 +383,32 @@ nav { display: none; }
 <span>Subtotal</span>
 <span id="cart-total-amount">$0.00</span>
 </div>
-<button class="checkout-btn">Secure Checkout</button>
+<button class="checkout-btn" id="proceed-checkout-btn">Proceed to Checkout</button>
+</div>
+</div>
+
+<!-- Checkout Form View -->
+<div class="checkout-form" id="checkout-form">
+<form id="order-form">
+<div class="form-group">
+<label for="customer-email">Gmail Address</label>
+<input type="email" id="customer-email" name="email" placeholder="your@gmail.com" required>
+</div>
+<div class="form-group">
+<label for="customer-phone">Phone Number</label>
+<input type="tel" id="customer-phone" name="phone" placeholder="+1 (555) 000-0000" required>
+</div>
+<div class="form-group">
+<label for="payment-method">Payment Method</label>
+<select id="payment-method" name="payment" required>
+<option value="">Select Payment Method</option>
+<option value="cashapp">Cash App</option>
+<option value="applepay">Apple Pay</option>
+</select>
+</div>
+<button type="button" class="back-to-cart-btn" id="back-to-cart-btn">Back to Cart</button>
+<button type="submit" class="checkout-btn">Complete Order</button>
+</form>
 </div>
 </div>
 
@@ -599,7 +418,7 @@ const products = [
 id: 1,
 category: "Timepieces",
 name: "Rolex Submariner Date (Black)",
-price: 5100.00,
+price: 250.00,
 oldPrice: 10200.00,
 image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&q=80&w=600"
 },
@@ -607,140 +426,110 @@ image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fi
 id: 2,
 category: "Timepieces",
 name: "Rolex GMT-Master II 'Pepsi'",
-price: 5400.00,
-oldPrice: 10800.00,
-image: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&q=80&w=600"
-},
-{
-id: 3,
-category: "Leather Goods",
-name: "LV Keepall Bandoulière 55",
-price: 995.00,
-oldPrice: 1990.00,
-image: "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&q=80&w=600"
-},
-{
-id: 4,
-category: "Leather Goods",
-name: "LV Christopher Backpack MM",
-price: 1725.00,
-oldPrice: 3450.00,
-image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600"
-},
-{
-id: 5,
-category: "Accessories",
-name: "LV Pocket Organizer Monogram",
-price: 285.00,
-oldPrice: 570.00,
-image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600"
-},
-{
-id: 6,
-category: "Fragrance",
-name: "LV Afternoon Swim (100ml)",
-price: 175.00,
-oldPrice: 350.00,
-image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=600"
-},
-{
-id: 7,
-category: "Footwear",
-name: "Nike Air Force 1 '07 White",
-price: 57.50,
-oldPrice: 115.00,
-image: "https://images.stockx.com/images/Nike-Air-Force-1-07-White-Product.jpg"
-},
-{
-id: 8,
-category: "Tech",
-name: "Apple AirPods Pro (2nd Gen)",
-price: 124.50,
-oldPrice: 249.00,
-image: "https://images.unsplash.com/photo-1588423770186-80f3ef0abc19?auto=format&fit=crop&q=80&w=600"
-}
-];
-
-let cart = [];
-
-function renderProducts() {
-const grid = document.getElementById('product-grid');
-grid.innerHTML = products.map(product => `
-<div class="product-card">
-<div class="image-container">
-<span class="discount-badge">50% OFF</span>
-<img src="${product.image}" alt="${product.name}" class="product-image">
-</div>
-<div class="product-info">
-<p class="product-category">${product.category}</p>
-<h3 class="product-title">${product.name}</h3>
-<div class="price-row">
-<span class="current-price">$${product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
-<span class="old-price">$${product.oldPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
-</div>
-<button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Bag</button>
-</div>
-</div>
-`).join('');
-}
-
-function addToCart(productId) {
-const product = products.find(p => p.id === productId);
-cart.push(product);
-updateCartUI();
-openCart();
-}
-
-function removeFromCart(index) {
-cart.splice(index, 1);
-updateCartUI();
-}
-
-function updateCartUI() {
-const count = document.getElementById('count');
-const cartItemsContainer = document.getElementById('cart-items-container');
-const totalAmount = document.getElementById('cart-total-amount');
-
-count.innerText = cart.length;
-
-if (cart.length === 0) {
-cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is currently empty.</p>';
-totalAmount.innerText = '$0.00';
-} else {
-cartItemsContainer.innerHTML = cart.map((item, index) => `
-<div class="cart-item">
-<img src="${item.image}" alt="${item.name}" class="cart-item-img">
-<div class="cart-item-info">
-<h4 class="cart-item-title">${item.name}</h4>
-<p class="cart-item-price">$${item.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</p>
-<button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
-</div>
-</div>
-`).join('');
-
-const total = cart.reduce((sum, item) => sum + item.price, 0);
-totalAmount.innerText = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+price: 250.00,
+product-grid');
+product.category}</p>
+product.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+oldPrice.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+count');
+items-container');
+total-amount');
+item.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</p>
+index})">Remove</button>
+US', {minimumFractionDigits: 2})}`;
 }
 }
 
 function openCart() {
 document.getElementById('cart-overlay').classList.add('active');
 document.getElementById('cart-sidebar').classList.add('active');
-document.body.style.overflow = 'hidden';
-}
-
-function closeCart() {
-document.getElementById('cart-overlay').classList.remove('active');
+overlay').classList.remove('active');
 document.getElementById('cart-sidebar').classList.remove('active');
 document.body.style.overflow = 'auto';
 }
 
+function showCheckoutForm() {
+document.getElementById('cart-view').style.display = 'none';
+document.getElementById('checkout-form').classList.add('active');
+}
+
+function showCartView() {
+document.getElementById('checkout-form').classList.remove('active');
+document.getElementById('cart-view').style.display = 'block';
+}
+
+function generateOrderNumber() {
+return 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
+
+function generateInvoice(orderData) {
+const orderNumber = generateOrderNumber();
+const timestamp = new Date().toLocaleString();
+
+let invoiceText = `
+╔════════════════════════════════════════════╗
+║ ELITE PRODUCTS - ORDER INVOICE ║
+╚════════════════════════════════════════════╝
+
+ORDER NUMBER: ${orderNumber}
+DATE & TIME: ${timestamp}
+
+CUSTOMER INFORMATION:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Email: ${orderData.email}
+Phone: ${orderData.phone}
+Payment Method: ${orderData.payment === 'cashapp' ? 'Cash App' : 'Apple Pay'}
+
+ORDER DETAILS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+`;
+
+orderData.items.forEach((item, index) => {
+invoiceText += `${index + 1}. ${item.name}\n Price: $${item.price.toLocaleString('en-US', {minimumFractionDigits: 2})}\n\n`;
+});
+
+invoiceText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TOTAL AMOUNT: $${orderData.total.toLocaleString('en-US', {minimumFractionDigits: 2})}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Status: ORDER CONFIRMED ✓
+Shipping: Processing...
+
+Thank you for your order!
+`;
+
+return { orderNumber, invoice: invoiceText };
+}
+
+// Event Listeners
 document.getElementById('cart-trigger').addEventListener('click', openCart);
 document.getElementById('close-cart').addEventListener('click', closeCart);
 document.getElementById('cart-overlay').addEventListener('click', closeCart);
 
-// Initial render
-renderProducts();
-</script>
-</body>
-</html>
+document.getElementById('proceed-checkout-btn').addEventListener('click', () => {
+if (cart.length === 0) {
+alert('Your cart is empty!');
+return;
+}
+showCheckoutForm();
+});
+
+document.getElementById('back-to-cart-btn').addEventListener('click', showCartView);
+
+document.getElementById('order-form').addEventListener('submit', (e) => {
+e.preventDefault();
+
+const email = document.getElementById('customer-email').value;
+const phone = document.getElementById('customer-phone').value;
+const payment = document.getElementById('payment-method').value;
+const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+const orderData = {
+email,
+phone,
+payment,
+items: cart,
+total
+};
+
+const { orderNumber, invoice } = generateInvoice(orderData);
