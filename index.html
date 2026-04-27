@@ -2,122 +2,121 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Luxury Store</title>
+<title>Elite Luxury</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
 body {
 margin: 0;
-font-family: Inter, sans-serif;
-background: radial-gradient(circle at top, #0f0f0f, #000);
+font-family: Arial;
+background: #000;
 color: white;
-overflow-x: hidden;
 }
 
 /* HEADER */
 header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 18px 30px;
-background: rgba(255,255,255,0.05);
-backdrop-filter: blur(20px);
-border-bottom: 1px solid rgba(255,255,255,0.1);
-position: sticky;
-top: 0;
+text-align: center;
+padding: 20px;
+border-bottom: 1px solid #222;
 }
 
 .logo {
-font-weight: 700;
-color: #00ffcc;
-letter-spacing: 1px;
+font-size: 28px;
+letter-spacing: 5px;
+}
+
+.slogan {
+color: #777;
+font-size: 13px;
+}
+
+/* SEARCH + FILTER */
+.topbar {
+display: flex;
+justify-content: center;
+gap: 10px;
+padding: 15px;
 }
 
 input {
 padding: 10px;
-border-radius: 10px;
+width: 200px;
+border-radius: 8px;
 border: none;
-width: 220px;
-outline: none;
 }
 
-/* HERO */
-.hero {
-text-align: center;
-padding: 60px 20px;
+.filter-btn {
+background: #111;
+color: white;
+border: 1px solid #333;
+padding: 10px;
+cursor: pointer;
+border-radius: 8px;
 }
 
-.hero h1 {
-font-size: 48px;
-background: linear-gradient(90deg, #00ffcc, #00aaff);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: float 3s ease-in-out infinite;
+/* GRID */
+.section {
+padding: 20px;
 }
 
-@keyframes float {
-0%,100% { transform: translateY(0); }
-50% { transform: translateY(-8px); }
+h2 {
+border-left: 4px solid white;
+padding-left: 10px;
 }
 
-/* PRODUCTS GRID */
-.products {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 25px;
-padding: 30px;
-max-width: 1000px;
-margin: auto;
+.grid {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
 }
 
+/* CARD */
 .card {
-background: rgba(255,255,255,0.06);
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 16px;
-padding: 15px;
+background: #0a0a0a;
+border: 1px solid #222;
+width: 200px;
+padding: 10px;
+border-radius: 10px;
 transition: 0.3s;
 cursor: pointer;
 }
 
 .card:hover {
-transform: translateY(-8px);
-border-color: #00ffcc;
+transform: translateY(-6px);
+border-color: #555;
 }
 
 .card img {
 width: 100%;
-border-radius: 12px;
+border-radius: 8px;
 }
 
 .price {
-color: #00ffcc;
-font-weight: bold;
+color: #aaa;
 }
 
 /* BUTTON */
 button {
 width: 100%;
-padding: 10px;
+padding: 8px;
 border: none;
-border-radius: 10px;
-background: linear-gradient(90deg, #00ffcc, #00aaff);
+background: white;
+color: black;
 font-weight: bold;
-cursor: pointer;
 margin-top: 8px;
+cursor: pointer;
 }
 
-/* CART DRAWER */
+/* CART */
 .cart {
 position: fixed;
-right: -320px;
+right: -300px;
 top: 0;
-width: 300px;
+width: 280px;
 height: 100%;
-background: rgba(0,0,0,0.95);
-border-left: 1px solid rgba(255,255,255,0.1);
-padding: 20px;
-transition: 0.4s;
+background: #111;
+padding: 15px;
+border-left: 1px solid #333;
+transition: 0.3s;
 }
 
 .cart.open {
@@ -137,24 +136,12 @@ align-items: center;
 justify-content: center;
 }
 
-.modal-content {
+.modal-box {
 background: #111;
 padding: 20px;
-border-radius: 15px;
+border-radius: 12px;
 width: 300px;
-}
-
-/* TOAST */
-.toast {
-position: fixed;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%);
-background: #00ffcc;
-color: black;
-padding: 10px 20px;
-border-radius: 10px;
-display: none;
+text-align: center;
 }
 </style>
 </head>
@@ -162,125 +149,136 @@ display: none;
 <body>
 
 <header>
-<div class="logo">LUXURY STORE</div>
-<input placeholder="Search..." onkeyup="search(this.value)">
-<button onclick="toggleCart()">Cart 🛒 (<span id="count">0</span>)</button>
+<div class="logo">ELITE LUXURY</div>
+<div class="slogan">Buy now. Resell later. Grind.</div>
 </header>
 
-<div class="hero">
-<h1>Premium Collection</h1>
-<p>Minimal • Luxury • Fast Checkout</p>
+<!-- SEARCH + FILTER -->
+<div class="topbar">
+<input placeholder="Search..." onkeyup="search(this.value)">
+<button class="filter-btn" onclick="showAll()">All</button>
+<button class="filter-btn" onclick="filter('shoes')">Shoes</button>
+<button class="filter-btn" onclick="filter('watch')">Watches</button>
+<button class="filter-btn" onclick="filter('cologne')">Cologne</button>
 </div>
 
-<div class="products" id="list">
+<!-- SHOES -->
+<div class="section">
+<h2>Shoes</h2>
+<div class="grid">
 
-<div class="card" data-name="shoes">
-<img src="https://via.placeholder.com/250">
-<h3>Luxury Shoes</h3>
+<div class="card" data-type="shoes" onclick="openModal('Nike Air Force 1','$120')">
+<img src="https://images.stockx.com/images/Nike-Air-Force-1-07-White-Product.jpg">
+<h3>Nike Air Force 1</h3>
 <p class="price">$120</p>
-<button onclick="add('Luxury Shoes',120)">Add</button>
+<button onclick="event.stopPropagation(); add()">Add</button>
 </div>
 
-<div class="card" data-name="watch">
-<img src="https://via.placeholder.com/250">
-<h3>Designer Watch</h3>
-<p class="price">$250</p>
-<button onclick="add('Designer Watch',250)">Add</button>
+<div class="card" data-type="shoes" onclick="openModal('Nike Dunk Panda','$150')">
+<img src="https://images.stockx.com/images/Nike-Dunk-Low-Panda-Product.jpg">
+<h3>Nike Dunk Panda</h3>
+<p class="price">$150</p>
+<button onclick="event.stopPropagation(); add()">Add</button>
 </div>
 
-<div class="card" data-name="hoodie">
-<img src="https://via.placeholder.com/250">
-<h3>Premium Hoodie</h3>
-<p class="price">$90</p>
-<button onclick="add('Premium Hoodie',90)">Add</button>
+</div>
 </div>
 
+<!-- WATCHES -->
+<div class="section">
+<h2>Watches</h2>
+<div class="grid">
+
+<div class="card" data-type="watch" onclick="openModal('Apple Watch','$399')">
+<img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQFX3">
+<h3>Apple Watch</h3>
+<p class="price">$399</p>
+<button onclick="event.stopPropagation(); add()">Add</button>
+</div>
+
+</div>
+</div>
+
+<!-- COLOGNE -->
+<div class="section">
+<h2>Cologne</h2>
+<div class="grid">
+
+<div class="card" data-type="cologne" onclick="openModal('Valentino Roma','$110')">
+<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539">
+<h3>Valentino Roma</h3>
+<p class="price">$110</p>
+<button onclick="event.stopPropagation(); add()">Add</button>
+</div>
+
+<div class="card" data-type="cologne" onclick="openModal('JPG Le Male','$95')">
+<img src="https://images.unsplash.com/photo-1615634262417-0e3c8a3c6f9c">
+<h3>JPG Le Male</h3>
+<p class="price">$95</p>
+<button onclick="event.stopPropagation(); add()">Add</button>
+</div>
+
+</div>
 </div>
 
 <!-- CART -->
 <div class="cart" id="cart">
-<h3>Your Cart</h3>
-<div id="items"></div>
-<p id="total"></p>
-<button onclick="checkout()">Checkout</button>
+<h3>Cart</h3>
+<p>No backend yet</p>
 </div>
 
 <!-- MODAL -->
 <div class="modal" id="modal" onclick="closeModal()">
-<div class="modal-content" onclick="event.stopPropagation()">
+<div class="modal-box" onclick="event.stopPropagation()">
 <h3 id="mname"></h3>
 <p id="mprice"></p>
 <button onclick="closeModal()">Close</button>
 </div>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">Added to cart</div>
-
-<!-- EMAILJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-emailjs.init("YOUR_PUBLIC_KEY");
-</script>
-
-<script>
-let cart = [];
-
-function add(name, price){
-cart.push({name, price});
-document.getElementById("count").innerText = cart.length;
-showToast();
+function add(){
+alert("Added to cart");
 }
 
+/* CART */
 function toggleCart(){
 document.getElementById("cart").classList.toggle("open");
-render();
 }
 
-function render(){
-let html = "";
-let total = 0;
-
-cart.forEach(i=>{
-html += i.name + " - $" + i.price + "<br>";
-total += i.price;
-});
-
-document.getElementById("items").innerHTML = html;
-document.getElementById("total").innerText = "Total: $" + total;
+/* MODAL */
+function openModal(name, price){
+document.getElementById("modal").style.display="flex";
+document.getElementById("mname").innerText=name;
+document.getElementById("mprice").innerText=price;
+}
+function closeModal(){
+document.getElementById("modal").style.display="none";
 }
 
 /* SEARCH */
 function search(v){
 document.querySelectorAll(".card").forEach(c=>{
-c.style.display = c.dataset.name.includes(v.toLowerCase()) ? "block":"none";
+c.style.display = c.innerText.toLowerCase().includes(v.toLowerCase())
+? "block":"none";
 });
 }
 
-/* CHECKOUT */
-function checkout(){
-let order = cart.map(i=>i.name+" $"+i.price).join(", ");
-let total = cart.reduce((a,b)=>a+b.price,0);
-
-emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
-message: "Order: " + order,
-total: total
+/* FILTER */
+function filter(type){
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display = c.dataset.type === type ? "block":"none";
 });
-
-alert("Order sent!");
-
-cart = [];
-document.getElementById("count").innerText = 0;
-toggleCart();
 }
-
-/* TOAST */
-function showToast(){
-let t = document.getElementById("toast");
-t.style.display = "block";
-setTimeout(()=>t.style.display="none",1200);
+function showAll(){
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display="block";
+});
 }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
